@@ -1,0 +1,120 @@
+*,
+*::after,
+*::before {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  font-family: sans-serif, system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue';
+  -webkit-tap-highlight-color: transparent;
+}
+
+html {
+  scroll-behavior: smooth;
+  scrollbar-width: thin;
+  scrollbar-color: white black;
+}
+
+body {
+  height: 800dvh;
+  overflow-x: hidden;
+}
+
+.container-fixed {
+  position: sticky;
+  inset: 0;
+  background-color: #000;
+  display: flex;
+  flex-wrap: wrap;
+  height: 100dvh;
+  place-content: center;
+
+  .container-octa {
+    --w: 150px;
+    --h: 150px;
+    width: var(--w);
+    height: var(--h);
+    position: relative;
+    top: -3vw;
+    perspective: 5000px;
+    transform-style: preserve-3d;
+    animation: rotar auto linear forwards;
+    animation-timeline: scroll();
+
+
+
+    .side {
+      position: absolute;
+      width: 200px;
+      width: var(--w);
+      height: var(--h);
+      clip-path: polygon(50% 0, 100% 100%, 0 100%);
+      background: radial-gradient(circle, transparent, #00c8ff88, transparent);
+    }
+
+    .side-btn {
+      top: 100%;
+      clip-path: polygon(0% 0%, 100% 0%, 50% 100%);
+    }
+
+    .base {
+      clip-path: none;
+      transform-origin: 50% 100%;
+      transform: rotateX(-90deg);
+      visibility: hidden;
+    }
+
+    .front {
+      transform-origin: 50% 100%;
+      transform: rotateX(-30deg);
+    }
+
+    .back {
+      transform-origin: 50% 100%;
+      transform: translateZ(var(--w)) rotateX(30deg);
+    }
+
+    .right {
+      transform-origin: 100% 100%;
+      transform: rotateY(90deg) rotateX(30deg);
+    }
+
+    .left {
+      transform-origin: 0% 100%;
+      transform: rotateY(-90deg) rotateX(30deg);
+    }
+
+    .side-btn {
+      background-color: transparent;
+    }
+
+    .front-bottom {
+      transform-origin: 50% 0;
+      transform: rotateX(30deg);
+    }
+
+    .back-bottom {
+      transform-origin: 50% 0;
+      transform: translateZ(var(--w)) rotateX(-30deg);
+    }
+
+    .left-bottom {
+      transform-origin: 0% 0%;
+      transform: rotateY(-90deg) rotateX(-30deg);
+    }
+
+    .right-bottom {
+      transform-origin: 100% 0%;
+      transform: rotateY(90deg) rotateX(-30deg);
+    }
+  }
+}
+
+@keyframes rotar {
+  0% {
+    transform: rotateX(-720deg) rotate(-55deg);
+  }
+
+  100% {
+    transform: rotateX(720deg) rotate(55deg);
+  }
+}
